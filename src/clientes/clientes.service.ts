@@ -22,11 +22,17 @@ export class ClientesService {
             where: { id },
         });
     }
-    
+
     update(id: number, data: UpdateClienteDto) {
         return this.prisma.cliente.update({
             where: { id },
             data,
+        });
+    }
+
+    remove(id: number) {
+        return this.prisma.cliente.delete({
+            where: { id },
         });
     }
 }
