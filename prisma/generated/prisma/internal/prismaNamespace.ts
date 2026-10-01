@@ -399,7 +399,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Profile: 'Profile',
-  Cliente: 'Cliente'
+  Cliente: 'Cliente',
+  Produto: 'Produto'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -415,7 +416,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "profile" | "cliente"
+    modelProps: "user" | "profile" | "cliente" | "produto"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -641,6 +642,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Produto: {
+      payload: Prisma.$ProdutoPayload<ExtArgs>
+      fields: Prisma.ProdutoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProdutoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProdutoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProdutoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProdutoPayload>
+        }
+        findFirst: {
+          args: Prisma.ProdutoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProdutoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProdutoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProdutoPayload>
+        }
+        findMany: {
+          args: Prisma.ProdutoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProdutoPayload>[]
+        }
+        create: {
+          args: Prisma.ProdutoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProdutoPayload>
+        }
+        createMany: {
+          args: Prisma.ProdutoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProdutoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProdutoPayload>[]
+        }
+        delete: {
+          args: Prisma.ProdutoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProdutoPayload>
+        }
+        update: {
+          args: Prisma.ProdutoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProdutoPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProdutoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProdutoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProdutoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProdutoPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProdutoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProdutoPayload>
+        }
+        aggregate: {
+          args: Prisma.ProdutoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProduto>
+        }
+        groupBy: {
+          args: Prisma.ProdutoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProdutoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProdutoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProdutoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -712,6 +787,19 @@ export const ClienteScalarFieldEnum = {
 } as const
 
 export type ClienteScalarFieldEnum = (typeof ClienteScalarFieldEnum)[keyof typeof ClienteScalarFieldEnum]
+
+
+export const ProdutoScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  descricao: 'descricao',
+  preco: 'preco',
+  quantidade: 'quantidade',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProdutoScalarFieldEnum = (typeof ProdutoScalarFieldEnum)[keyof typeof ProdutoScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -917,6 +1005,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   profile?: Prisma.ProfileOmit
   cliente?: Prisma.ClienteOmit
+  produto?: Prisma.ProdutoOmit
 }
 
 /* Types for Logging */

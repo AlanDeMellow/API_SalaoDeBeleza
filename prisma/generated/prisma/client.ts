@@ -54,3 +54,8 @@ export type Profile = Prisma.ProfileModel
  * 
  */
 export type Cliente = Prisma.ClienteModel
+/**
+ * Model Produto
+ * 
+ */
+export type Produto = Prisma.ProdutoModel
