@@ -240,6 +240,7 @@ export type ProcedimentoWhereInput = {
   duracao?: Prisma.IntFilter<"Procedimento"> | number
   createdAt?: Prisma.DateTimeFilter<"Procedimento"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Procedimento"> | Date | string
+  agendamentos?: Prisma.AgendamentoListRelationFilter
 }
 
 export type ProcedimentoOrderByWithRelationInput = {
@@ -250,6 +251,7 @@ export type ProcedimentoOrderByWithRelationInput = {
   duracao?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  agendamentos?: Prisma.AgendamentoOrderByRelationAggregateInput
 }
 
 export type ProcedimentoWhereUniqueInput = Prisma.AtLeast<{
@@ -263,6 +265,7 @@ export type ProcedimentoWhereUniqueInput = Prisma.AtLeast<{
   duracao?: Prisma.IntFilter<"Procedimento"> | number
   createdAt?: Prisma.DateTimeFilter<"Procedimento"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Procedimento"> | Date | string
+  agendamentos?: Prisma.AgendamentoListRelationFilter
 }, "id">
 
 export type ProcedimentoOrderByWithAggregationInput = {
@@ -300,6 +303,7 @@ export type ProcedimentoCreateInput = {
   duracao: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  agendamentos?: Prisma.AgendamentoCreateNestedManyWithoutProcedimentoInput
 }
 
 export type ProcedimentoUncheckedCreateInput = {
@@ -310,6 +314,7 @@ export type ProcedimentoUncheckedCreateInput = {
   duracao: number
   createdAt?: Date | string
   updatedAt?: Date | string
+  agendamentos?: Prisma.AgendamentoUncheckedCreateNestedManyWithoutProcedimentoInput
 }
 
 export type ProcedimentoUpdateInput = {
@@ -319,6 +324,7 @@ export type ProcedimentoUpdateInput = {
   duracao?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agendamentos?: Prisma.AgendamentoUpdateManyWithoutProcedimentoNestedInput
 }
 
 export type ProcedimentoUncheckedUpdateInput = {
@@ -329,6 +335,7 @@ export type ProcedimentoUncheckedUpdateInput = {
   duracao?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agendamentos?: Prisma.AgendamentoUncheckedUpdateManyWithoutProcedimentoNestedInput
 }
 
 export type ProcedimentoCreateManyInput = {
@@ -402,6 +409,108 @@ export type ProcedimentoSumOrderByAggregateInput = {
   duracao?: Prisma.SortOrder
 }
 
+export type ProcedimentoScalarRelationFilter = {
+  is?: Prisma.ProcedimentoWhereInput
+  isNot?: Prisma.ProcedimentoWhereInput
+}
+
+export type ProcedimentoCreateNestedOneWithoutAgendamentosInput = {
+  create?: Prisma.XOR<Prisma.ProcedimentoCreateWithoutAgendamentosInput, Prisma.ProcedimentoUncheckedCreateWithoutAgendamentosInput>
+  connectOrCreate?: Prisma.ProcedimentoCreateOrConnectWithoutAgendamentosInput
+  connect?: Prisma.ProcedimentoWhereUniqueInput
+}
+
+export type ProcedimentoUpdateOneRequiredWithoutAgendamentosNestedInput = {
+  create?: Prisma.XOR<Prisma.ProcedimentoCreateWithoutAgendamentosInput, Prisma.ProcedimentoUncheckedCreateWithoutAgendamentosInput>
+  connectOrCreate?: Prisma.ProcedimentoCreateOrConnectWithoutAgendamentosInput
+  upsert?: Prisma.ProcedimentoUpsertWithoutAgendamentosInput
+  connect?: Prisma.ProcedimentoWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProcedimentoUpdateToOneWithWhereWithoutAgendamentosInput, Prisma.ProcedimentoUpdateWithoutAgendamentosInput>, Prisma.ProcedimentoUncheckedUpdateWithoutAgendamentosInput>
+}
+
+export type ProcedimentoCreateWithoutAgendamentosInput = {
+  nome: string
+  descricao?: string | null
+  preco: number
+  duracao: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ProcedimentoUncheckedCreateWithoutAgendamentosInput = {
+  id?: number
+  nome: string
+  descricao?: string | null
+  preco: number
+  duracao: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ProcedimentoCreateOrConnectWithoutAgendamentosInput = {
+  where: Prisma.ProcedimentoWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProcedimentoCreateWithoutAgendamentosInput, Prisma.ProcedimentoUncheckedCreateWithoutAgendamentosInput>
+}
+
+export type ProcedimentoUpsertWithoutAgendamentosInput = {
+  update: Prisma.XOR<Prisma.ProcedimentoUpdateWithoutAgendamentosInput, Prisma.ProcedimentoUncheckedUpdateWithoutAgendamentosInput>
+  create: Prisma.XOR<Prisma.ProcedimentoCreateWithoutAgendamentosInput, Prisma.ProcedimentoUncheckedCreateWithoutAgendamentosInput>
+  where?: Prisma.ProcedimentoWhereInput
+}
+
+export type ProcedimentoUpdateToOneWithWhereWithoutAgendamentosInput = {
+  where?: Prisma.ProcedimentoWhereInput
+  data: Prisma.XOR<Prisma.ProcedimentoUpdateWithoutAgendamentosInput, Prisma.ProcedimentoUncheckedUpdateWithoutAgendamentosInput>
+}
+
+export type ProcedimentoUpdateWithoutAgendamentosInput = {
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preco?: Prisma.FloatFieldUpdateOperationsInput | number
+  duracao?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ProcedimentoUncheckedUpdateWithoutAgendamentosInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  descricao?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preco?: Prisma.FloatFieldUpdateOperationsInput | number
+  duracao?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+
+/**
+ * Count Type ProcedimentoCountOutputType
+ */
+
+export type ProcedimentoCountOutputType = {
+  agendamentos: number
+}
+
+export type ProcedimentoCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  agendamentos?: boolean | ProcedimentoCountOutputTypeCountAgendamentosArgs
+}
+
+/**
+ * ProcedimentoCountOutputType without action
+ */
+export type ProcedimentoCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProcedimentoCountOutputType
+   */
+  select?: Prisma.ProcedimentoCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ProcedimentoCountOutputType without action
+ */
+export type ProcedimentoCountOutputTypeCountAgendamentosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AgendamentoWhereInput
+}
 
 
 export type ProcedimentoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -412,6 +521,8 @@ export type ProcedimentoSelect<ExtArgs extends runtime.Types.Extensions.Internal
   duracao?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  agendamentos?: boolean | Prisma.Procedimento$agendamentosArgs<ExtArgs>
+  _count?: boolean | Prisma.ProcedimentoCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["procedimento"]>
 
 export type ProcedimentoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -445,10 +556,18 @@ export type ProcedimentoSelectScalar = {
 }
 
 export type ProcedimentoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "descricao" | "preco" | "duracao" | "createdAt" | "updatedAt", ExtArgs["result"]["procedimento"]>
+export type ProcedimentoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  agendamentos?: boolean | Prisma.Procedimento$agendamentosArgs<ExtArgs>
+  _count?: boolean | Prisma.ProcedimentoCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type ProcedimentoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
+export type ProcedimentoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $ProcedimentoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Procedimento"
-  objects: {}
+  objects: {
+    agendamentos: Prisma.$AgendamentoPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     nome: string
@@ -851,6 +970,7 @@ readonly fields: ProcedimentoFieldRefs;
  */
 export interface Prisma__ProcedimentoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  agendamentos<T extends Prisma.Procedimento$agendamentosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Procedimento$agendamentosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AgendamentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -904,6 +1024,10 @@ export type ProcedimentoFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.ProcedimentoOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcedimentoInclude<ExtArgs> | null
+  /**
    * Filter, which Procedimento to fetch.
    */
   where: Prisma.ProcedimentoWhereUniqueInput
@@ -922,6 +1046,10 @@ export type ProcedimentoFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Exte
    */
   omit?: Prisma.ProcedimentoOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcedimentoInclude<ExtArgs> | null
+  /**
    * Filter, which Procedimento to fetch.
    */
   where: Prisma.ProcedimentoWhereUniqueInput
@@ -939,6 +1067,10 @@ export type ProcedimentoFindFirstArgs<ExtArgs extends runtime.Types.Extensions.I
    * Omit specific fields from the Procedimento
    */
   omit?: Prisma.ProcedimentoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcedimentoInclude<ExtArgs> | null
   /**
    * Filter, which Procedimento to fetch.
    */
@@ -988,6 +1120,10 @@ export type ProcedimentoFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Exten
    */
   omit?: Prisma.ProcedimentoOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcedimentoInclude<ExtArgs> | null
+  /**
    * Filter, which Procedimento to fetch.
    */
   where?: Prisma.ProcedimentoWhereInput
@@ -1035,6 +1171,10 @@ export type ProcedimentoFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Omit specific fields from the Procedimento
    */
   omit?: Prisma.ProcedimentoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcedimentoInclude<ExtArgs> | null
   /**
    * Filter, which Procedimentos to fetch.
    */
@@ -1084,6 +1224,10 @@ export type ProcedimentoCreateArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.ProcedimentoOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcedimentoInclude<ExtArgs> | null
+  /**
    * The data needed to create a Procedimento.
    */
   data: Prisma.XOR<Prisma.ProcedimentoCreateInput, Prisma.ProcedimentoUncheckedCreateInput>
@@ -1129,6 +1273,10 @@ export type ProcedimentoUpdateArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Omit specific fields from the Procedimento
    */
   omit?: Prisma.ProcedimentoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcedimentoInclude<ExtArgs> | null
   /**
    * The data needed to update a Procedimento.
    */
@@ -1196,6 +1344,10 @@ export type ProcedimentoUpsertArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.ProcedimentoOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcedimentoInclude<ExtArgs> | null
+  /**
    * The filter to search for the Procedimento to update in case it exists.
    */
   where: Prisma.ProcedimentoWhereUniqueInput
@@ -1222,6 +1374,10 @@ export type ProcedimentoDeleteArgs<ExtArgs extends runtime.Types.Extensions.Inte
    */
   omit?: Prisma.ProcedimentoOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcedimentoInclude<ExtArgs> | null
+  /**
    * Filter which Procedimento to delete.
    */
   where: Prisma.ProcedimentoWhereUniqueInput
@@ -1242,6 +1398,30 @@ export type ProcedimentoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
 }
 
 /**
+ * Procedimento.agendamentos
+ */
+export type Procedimento$agendamentosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Agendamento
+   */
+  select?: Prisma.AgendamentoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Agendamento
+   */
+  omit?: Prisma.AgendamentoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgendamentoInclude<ExtArgs> | null
+  where?: Prisma.AgendamentoWhereInput
+  orderBy?: Prisma.AgendamentoOrderByWithRelationInput | Prisma.AgendamentoOrderByWithRelationInput[]
+  cursor?: Prisma.AgendamentoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AgendamentoScalarFieldEnum | Prisma.AgendamentoScalarFieldEnum[]
+}
+
+/**
  * Procedimento without action
  */
 export type ProcedimentoDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1253,4 +1433,8 @@ export type ProcedimentoDefaultArgs<ExtArgs extends runtime.Types.Extensions.Int
    * Omit specific fields from the Procedimento
    */
   omit?: Prisma.ProcedimentoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcedimentoInclude<ExtArgs> | null
 }

@@ -64,3 +64,8 @@ export type Produto = Prisma.ProdutoModel
  * 
  */
 export type Procedimento = Prisma.ProcedimentoModel
+/**
+ * Model Agendamento
+ * 
+ */
+export type Agendamento = Prisma.AgendamentoModel

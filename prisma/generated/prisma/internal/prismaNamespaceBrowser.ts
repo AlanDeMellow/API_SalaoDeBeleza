@@ -55,7 +55,8 @@ export const ModelName = {
   Profile: 'Profile',
   Cliente: 'Cliente',
   Produto: 'Produto',
-  Procedimento: 'Procedimento'
+  Procedimento: 'Procedimento',
+  Agendamento: 'Agendamento'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -132,6 +133,20 @@ export const ProcedimentoScalarFieldEnum = {
 } as const
 
 export type ProcedimentoScalarFieldEnum = (typeof ProcedimentoScalarFieldEnum)[keyof typeof ProcedimentoScalarFieldEnum]
+
+
+export const AgendamentoScalarFieldEnum = {
+  id: 'id',
+  dataHora: 'dataHora',
+  status: 'status',
+  observacoes: 'observacoes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  clienteId: 'clienteId',
+  procedimentoId: 'procedimentoId'
+} as const
+
+export type AgendamentoScalarFieldEnum = (typeof AgendamentoScalarFieldEnum)[keyof typeof AgendamentoScalarFieldEnum]
 
 
 export const SortOrder = {

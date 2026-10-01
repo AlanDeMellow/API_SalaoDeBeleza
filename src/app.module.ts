@@ -3,6 +3,8 @@ import { UsersModule } from './users/users.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { ClientesModule } from './clientes/clientes.module';
 import { ProdutosModule } from './produtos/produtos.module';
+import { ProcedimentosModule } from './procedimentos/procedimentos.module';
+import { AgendamentosModule } from './agendamentos/agendamentos.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 
@@ -12,7 +14,9 @@ import { ConfigModule } from '@nestjs/config';
     UsersModule,
     ClientesModule, 
     ProfilesModule,
-    ProdutosModule, 
+    ProdutosModule,
+    AgendamentosModule,
+    ProcedimentosModule,
     AuthModule], //conectar sub modulos
   controllers: [],
   providers: [],
