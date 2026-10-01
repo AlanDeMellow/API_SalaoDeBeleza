@@ -400,7 +400,8 @@ export const ModelName = {
   User: 'User',
   Profile: 'Profile',
   Cliente: 'Cliente',
-  Produto: 'Produto'
+  Produto: 'Produto',
+  Procedimento: 'Procedimento'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -416,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "profile" | "cliente" | "produto"
+    modelProps: "user" | "profile" | "cliente" | "produto" | "procedimento"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -716,6 +717,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Procedimento: {
+      payload: Prisma.$ProcedimentoPayload<ExtArgs>
+      fields: Prisma.ProcedimentoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProcedimentoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcedimentoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProcedimentoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcedimentoPayload>
+        }
+        findFirst: {
+          args: Prisma.ProcedimentoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcedimentoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProcedimentoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcedimentoPayload>
+        }
+        findMany: {
+          args: Prisma.ProcedimentoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcedimentoPayload>[]
+        }
+        create: {
+          args: Prisma.ProcedimentoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcedimentoPayload>
+        }
+        createMany: {
+          args: Prisma.ProcedimentoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProcedimentoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcedimentoPayload>[]
+        }
+        delete: {
+          args: Prisma.ProcedimentoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcedimentoPayload>
+        }
+        update: {
+          args: Prisma.ProcedimentoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcedimentoPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProcedimentoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProcedimentoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProcedimentoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcedimentoPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProcedimentoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProcedimentoPayload>
+        }
+        aggregate: {
+          args: Prisma.ProcedimentoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProcedimento>
+        }
+        groupBy: {
+          args: Prisma.ProcedimentoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProcedimentoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProcedimentoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProcedimentoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -800,6 +875,19 @@ export const ProdutoScalarFieldEnum = {
 } as const
 
 export type ProdutoScalarFieldEnum = (typeof ProdutoScalarFieldEnum)[keyof typeof ProdutoScalarFieldEnum]
+
+
+export const ProcedimentoScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  descricao: 'descricao',
+  preco: 'preco',
+  duracao: 'duracao',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ProcedimentoScalarFieldEnum = (typeof ProcedimentoScalarFieldEnum)[keyof typeof ProcedimentoScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1006,6 +1094,7 @@ export type GlobalOmitConfig = {
   profile?: Prisma.ProfileOmit
   cliente?: Prisma.ClienteOmit
   produto?: Prisma.ProdutoOmit
+  procedimento?: Prisma.ProcedimentoOmit
 }
 
 /* Types for Logging */

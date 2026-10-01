@@ -37,3 +37,8 @@ export type Cliente = Prisma.ClienteModel
  * 
  */
 export type Produto = Prisma.ProdutoModel
+/**
+ * Model Procedimento
+ * 
+ */
+export type Procedimento = Prisma.ProcedimentoModel
