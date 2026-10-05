@@ -40,9 +40,6 @@ O backend do projeto foi desenvolvido utilizando:
 - **TypeScript** - linguagem utilizada no desenvolvimento;
 - **Prisma ORM** - responsável pela comunicação entre a aplicação e o banco de dados;
 - **SQLite** - banco de dados utilizado no projeto;
-- **JWT** - utilizado para autenticação e proteção das rotas;
-- **bcryptjs** - utilizado para trabalhar com o hash das senhas;
-- **class-validator** - utilizado para validar os dados enviados para a API.
 
 ---
 
