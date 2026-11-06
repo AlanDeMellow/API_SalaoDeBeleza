@@ -7,34 +7,67 @@ import { UpdateAgendamentoDto } from '../dtos/update-agendamento.dto';
 export class AgendamentosService {
     constructor(private prisma: PrismaService) { }
 
-    // para os agendamentos é preciso verificar se o cliente e o procedimento existe e só então criar um horario na agenda.
+    // Para criar um agendamento é necessário verificar
+    // se o cliente e o procedimento existem
 
-    async create(data: CreateAgendamentoDto) {
+    async create(
+        data: CreateAgendamentoDto,
+        user: any,
+    ) {
+        let clienteId = data.clienteId;
+
+        if (user.role === 'CLIENTE') {
+            const clienteUsuario = await this.prisma.cliente.findUnique({
+                where: {
+                    userId: user.sub,
+                },
+            });
+
+            if (!clienteUsuario) {
+                throw new NotFoundException(
+                    'Cliente não encontrado para este usuário',
+                );
+            }
+
+            clienteId = clienteUsuario.id;
+        }
+
+        // Verifica se o cliente existe.
         const cliente = await this.prisma.cliente.findUnique({
-            where: { id: data.clienteId },
+            where: {
+                id: clienteId,
+            },
         });
 
         if (!cliente) {
-            throw new NotFoundException('Cliente não encontrado');
+            throw new NotFoundException(
+                'Cliente não encontrado',
+            );
         }
 
+        // Verifica se o procedimento existe.
         const procedimento = await this.prisma.procedimento.findUnique({
-            where: { id: data.procedimentoId },
+            where: {
+                id: data.procedimentoId,
+            },
         });
 
         if (!procedimento) {
-            throw new NotFoundException('Procedimento não encontrado');
+            throw new NotFoundException(
+                'Procedimento não encontrado',
+            );
         }
 
-        // aqui deu erro pois anteriormente o DataHora estava como String e eu defini como DateTime no Schema do Prisma, então tive que fazer a conversão para Date.
-
+        // dataHora está como DateTime no Prisma,
+        // então é necessário converter para Date.
         return this.prisma.agendamento.create({
             data: {
-                clienteId: data.clienteId,
+                clienteId: clienteId,
                 procedimentoId: data.procedimentoId,
                 dataHora: new Date(data.dataHora),
                 observacoes: data.observacoes,
             },
+
             include: {
                 cliente: true,
                 procedimento: true,
@@ -42,10 +75,9 @@ export class AgendamentosService {
         });
     }
 
-    /* 
-     O Get estava retornando apenas os IDs, mas queria que retornasse algo mais completo,
-    então usei o Include para incluir os dados dos Cliente e procedimento quando retornar,
-    além de retornar em ordem ascendente pelo horario.
+    /*
+      O GET retorna também os dados do cliente e procedimento
+      através do include e organiza pela data do agendamento.
     */
 
     findAll() {
@@ -60,9 +92,12 @@ export class AgendamentosService {
         });
     }
 
+    // Retorna somente os agendamentos do cliente logado.
     async findByUserId(userId: number) {
         const cliente = await this.prisma.cliente.findUnique({
-            where: { userId },
+            where: {
+                userId,
+            },
         });
 
         if (!cliente) {
@@ -75,10 +110,12 @@ export class AgendamentosService {
             where: {
                 clienteId: cliente.id,
             },
+
             include: {
                 cliente: true,
                 procedimento: true,
             },
+
             orderBy: {
                 dataHora: 'asc',
             },
@@ -87,7 +124,10 @@ export class AgendamentosService {
 
     async findOne(id: number) {
         const agendamento = await this.prisma.agendamento.findUnique({
-            where: { id },
+            where: {
+                id,
+            },
+
             include: {
                 cliente: true,
                 procedimento: true,
@@ -95,45 +135,67 @@ export class AgendamentosService {
         });
 
         if (!agendamento) {
-            throw new NotFoundException('Agendamento não encontrado');
+            throw new NotFoundException(
+                'Agendamento não encontrado',
+            );
         }
 
         return agendamento;
     }
 
-    async update(id: number, data: UpdateAgendamentoDto) {
+    async update(
+        id: number,
+        data: UpdateAgendamentoDto,
+    ) {
         await this.findOne(id);
 
         if (data.clienteId) {
             const cliente = await this.prisma.cliente.findUnique({
-                where: { id: data.clienteId },
+                where: {
+                    id: data.clienteId,
+                },
             });
 
             if (!cliente) {
-                throw new NotFoundException('Cliente não encontrado');
+                throw new NotFoundException(
+                    'Cliente não encontrado',
+                );
             }
         }
 
         if (data.procedimentoId) {
             const procedimento = await this.prisma.procedimento.findUnique({
-                where: { id: data.procedimentoId },
+                where: {
+                    id: data.procedimentoId,
+                },
             });
 
             if (!procedimento) {
-                throw new NotFoundException('Procedimento não encontrado');
+                throw new NotFoundException(
+                    'Procedimento não encontrado',
+                );
             }
         }
 
         return this.prisma.agendamento.update({
-            where: { id },
+            where: {
+                id,
+            },
+
             data: {
                 clienteId: data.clienteId,
                 procedimentoId: data.procedimentoId,
-                // se foi enviado alguma data pelo Body fazemos a conversão, se não apenas mantemos como esta.
-                dataHora: data.dataHora ? new Date(data.dataHora) : undefined,
+
+                // Se uma nova data for enviada,
+                // fazemos a conversão para Date.
+                dataHora: data.dataHora
+                    ? new Date(data.dataHora)
+                    : undefined,
+
                 status: data.status,
                 observacoes: data.observacoes,
             },
+
             include: {
                 cliente: true,
                 procedimento: true,
@@ -145,13 +207,22 @@ export class AgendamentosService {
         await this.findOne(id);
 
         return this.prisma.agendamento.delete({
-            where: { id },
+            where: {
+                id,
+            },
         });
     }
 
-    async cancelarDoCliente(userId: number, agendamentoId: number) {
+    // Cancela somente um agendamento pertencente
+    // ao cliente autenticado.
+    async cancelarDoCliente(
+        userId: number,
+        agendamentoId: number,
+    ) {
         const cliente = await this.prisma.cliente.findUnique({
-            where: { userId },
+            where: {
+                userId,
+            },
         });
 
         if (!cliente) {
@@ -177,9 +248,11 @@ export class AgendamentosService {
             where: {
                 id: agendamentoId,
             },
+
             data: {
                 status: 'CANCELADO',
             },
+
             include: {
                 cliente: true,
                 procedimento: true,
