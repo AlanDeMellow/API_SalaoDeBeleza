@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Req
 } from '@nestjs/common';
 
 import { AgendamentosService } from './agendamentos.service';
@@ -16,7 +17,7 @@ import { UpdateAgendamentoDto } from '../dtos/update-agendamento.dto';
 export class AgendamentosController {
   constructor(
     private readonly agendamentosService: AgendamentosService,
-  ) {}
+  ) { }
 
   @Post()
   create(@Body() data: CreateAgendamentoDto) {
@@ -28,9 +29,25 @@ export class AgendamentosController {
     return this.agendamentosService.findAll();
   }
 
+  @Get('me')
+  findMyAppointments(@Req() req: any) {
+    return this.agendamentosService.findByUserId(req.user.sub);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.agendamentosService.findOne(Number(id));
+  }
+
+  @Patch('me/:id/cancelar')
+  cancelarMeuAgendamento(
+    @Req() req: any,
+    @Param('id') id: string,
+  ) {
+    return this.agendamentosService.cancelarDoCliente(
+      req.user.sub,
+      Number(id),
+    );
   }
 
   @Patch(':id')

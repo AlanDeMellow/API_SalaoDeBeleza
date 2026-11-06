@@ -11,8 +11,10 @@ import {
 import { ProdutosService } from './produtos.service';
 import { CreateProdutoDto } from '../dtos/create-produto.dto';
 import { UpdateProdutoDto } from '../dtos/update-produto.dto';
+import { Roles } from '../auth/roles.decorator';
 
 @Controller('produtos')
+@Roles('ADMIN')
 export class ProdutosController {
   constructor(private readonly produtosService: ProdutosService) {}
 

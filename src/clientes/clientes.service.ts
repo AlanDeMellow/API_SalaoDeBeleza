@@ -17,6 +17,20 @@ export class ClientesService {
         return this.prisma.cliente.findMany();
     }
 
+    async findByUserId(userId: number) {
+        const cliente = await this.prisma.cliente.findUnique({
+            where: { userId },
+        });
+
+        if (!cliente) {
+            throw new NotFoundException(
+                'Cliente não encontrado para este usuário'
+            );
+        }
+
+        return cliente;
+    }
+
     async findOne(id: number) {
         const cliente = await this.prisma.cliente.findUnique({
             where: { id },

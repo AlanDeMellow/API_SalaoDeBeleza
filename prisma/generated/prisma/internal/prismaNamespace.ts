@@ -934,7 +934,8 @@ export const ClienteScalarFieldEnum = {
   email: 'email',
   observacoes: 'observacoes',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  userId: 'userId'
 } as const
 
 export type ClienteScalarFieldEnum = (typeof ClienteScalarFieldEnum)[keyof typeof ClienteScalarFieldEnum]

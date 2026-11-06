@@ -1,4 +1,5 @@
-import { IsDate, IsNotEmpty, Length, min } from "class-validator";
+import { IsNotEmpty, Length } from "class-validator";
+
 export class CreateUserDTO {
 
     @IsNotEmpty()
@@ -10,5 +11,8 @@ export class CreateUserDTO {
 
     @IsNotEmpty()
     passwordHash: string = '';
+
+    @IsNotEmpty()
+    telefone: string = '';
 
 }

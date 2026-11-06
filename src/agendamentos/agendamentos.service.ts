@@ -60,6 +60,31 @@ export class AgendamentosService {
         });
     }
 
+    async findByUserId(userId: number) {
+        const cliente = await this.prisma.cliente.findUnique({
+            where: { userId },
+        });
+
+        if (!cliente) {
+            throw new NotFoundException(
+                'Cliente não encontrado para este usuário',
+            );
+        }
+
+        return this.prisma.agendamento.findMany({
+            where: {
+                clienteId: cliente.id,
+            },
+            include: {
+                cliente: true,
+                procedimento: true,
+            },
+            orderBy: {
+                dataHora: 'asc',
+            },
+        });
+    }
+
     async findOne(id: number) {
         const agendamento = await this.prisma.agendamento.findUnique({
             where: { id },
@@ -121,6 +146,44 @@ export class AgendamentosService {
 
         return this.prisma.agendamento.delete({
             where: { id },
+        });
+    }
+
+    async cancelarDoCliente(userId: number, agendamentoId: number) {
+        const cliente = await this.prisma.cliente.findUnique({
+            where: { userId },
+        });
+
+        if (!cliente) {
+            throw new NotFoundException(
+                'Cliente não encontrado para este usuário',
+            );
+        }
+
+        const agendamento = await this.prisma.agendamento.findFirst({
+            where: {
+                id: agendamentoId,
+                clienteId: cliente.id,
+            },
+        });
+
+        if (!agendamento) {
+            throw new NotFoundException(
+                'Agendamento não encontrado para este cliente',
+            );
+        }
+
+        return this.prisma.agendamento.update({
+            where: {
+                id: agendamentoId,
+            },
+            data: {
+                status: 'CANCELADO',
+            },
+            include: {
+                cliente: true,
+                procedimento: true,
+            },
         });
     }
 }

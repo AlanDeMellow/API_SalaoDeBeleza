@@ -225,6 +225,7 @@ export type UserWhereInput = {
   passwordHash?: Prisma.StringFilter<"User"> | string
   role?: Prisma.StringFilter<"User"> | string
   profile?: Prisma.XOR<Prisma.ProfileNullableScalarRelationFilter, Prisma.ProfileWhereInput> | null
+  cliente?: Prisma.XOR<Prisma.ClienteNullableScalarRelationFilter, Prisma.ClienteWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -235,6 +236,7 @@ export type UserOrderByWithRelationInput = {
   passwordHash?: Prisma.SortOrder
   role?: Prisma.SortOrder
   profile?: Prisma.ProfileOrderByWithRelationInput
+  cliente?: Prisma.ClienteOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -248,6 +250,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   passwordHash?: Prisma.StringFilter<"User"> | string
   role?: Prisma.StringFilter<"User"> | string
   profile?: Prisma.XOR<Prisma.ProfileNullableScalarRelationFilter, Prisma.ProfileWhereInput> | null
+  cliente?: Prisma.XOR<Prisma.ClienteNullableScalarRelationFilter, Prisma.ClienteWhereInput> | null
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -280,9 +283,10 @@ export type UserCreateInput = {
   name: string
   email: string
   createdAt?: Date | string
-  passwordHash?: string
+  passwordHash: string
   role?: string
   profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+  cliente?: Prisma.ClienteCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -290,9 +294,10 @@ export type UserUncheckedCreateInput = {
   name: string
   email: string
   createdAt?: Date | string
-  passwordHash?: string
+  passwordHash: string
   role?: string
   profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+  cliente?: Prisma.ClienteUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -302,6 +307,7 @@ export type UserUpdateInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+  cliente?: Prisma.ClienteUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -312,6 +318,7 @@ export type UserUncheckedUpdateInput = {
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
   profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
+  cliente?: Prisma.ClienteUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -319,7 +326,7 @@ export type UserCreateManyInput = {
   name: string
   email: string
   createdAt?: Date | string
-  passwordHash?: string
+  passwordHash: string
   role?: string
 }
 
@@ -380,6 +387,11 @@ export type UserScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput
 }
 
+export type UserNullableScalarRelationFilter = {
+  is?: Prisma.UserWhereInput | null
+  isNot?: Prisma.UserWhereInput | null
+}
+
 export type StringFieldUpdateOperationsInput = {
   set?: string
 }
@@ -410,12 +422,29 @@ export type UserUpdateOneRequiredWithoutProfileNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutProfileInput, Prisma.UserUpdateWithoutProfileInput>, Prisma.UserUncheckedUpdateWithoutProfileInput>
 }
 
+export type UserCreateNestedOneWithoutClienteInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutClienteInput, Prisma.UserUncheckedCreateWithoutClienteInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutClienteInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutClienteNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutClienteInput, Prisma.UserUncheckedCreateWithoutClienteInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutClienteInput
+  upsert?: Prisma.UserUpsertWithoutClienteInput
+  disconnect?: Prisma.UserWhereInput | boolean
+  delete?: Prisma.UserWhereInput | boolean
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutClienteInput, Prisma.UserUpdateWithoutClienteInput>, Prisma.UserUncheckedUpdateWithoutClienteInput>
+}
+
 export type UserCreateWithoutProfileInput = {
   name: string
   email: string
   createdAt?: Date | string
-  passwordHash?: string
+  passwordHash: string
   role?: string
+  cliente?: Prisma.ClienteCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProfileInput = {
@@ -423,8 +452,9 @@ export type UserUncheckedCreateWithoutProfileInput = {
   name: string
   email: string
   createdAt?: Date | string
-  passwordHash?: string
+  passwordHash: string
   role?: string
+  cliente?: Prisma.ClienteUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProfileInput = {
@@ -449,6 +479,7 @@ export type UserUpdateWithoutProfileInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente?: Prisma.ClienteUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProfileInput = {
@@ -458,6 +489,61 @@ export type UserUncheckedUpdateWithoutProfileInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   role?: Prisma.StringFieldUpdateOperationsInput | string
+  cliente?: Prisma.ClienteUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutClienteInput = {
+  name: string
+  email: string
+  createdAt?: Date | string
+  passwordHash: string
+  role?: string
+  profile?: Prisma.ProfileCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutClienteInput = {
+  id?: number
+  name: string
+  email: string
+  createdAt?: Date | string
+  passwordHash: string
+  role?: string
+  profile?: Prisma.ProfileUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutClienteInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutClienteInput, Prisma.UserUncheckedCreateWithoutClienteInput>
+}
+
+export type UserUpsertWithoutClienteInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutClienteInput, Prisma.UserUncheckedUpdateWithoutClienteInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutClienteInput, Prisma.UserUncheckedCreateWithoutClienteInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutClienteInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutClienteInput, Prisma.UserUncheckedUpdateWithoutClienteInput>
+}
+
+export type UserUpdateWithoutClienteInput = {
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  profile?: Prisma.ProfileUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutClienteInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  profile?: Prisma.ProfileUncheckedUpdateOneWithoutUserNestedInput
 }
 
 
@@ -470,6 +556,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   passwordHash?: boolean
   role?: boolean
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
+  cliente?: boolean | Prisma.User$clienteArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -502,6 +589,7 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "createdAt" | "passwordHash" | "role", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   profile?: boolean | Prisma.User$profileArgs<ExtArgs>
+  cliente?: boolean | Prisma.User$clienteArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -510,6 +598,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     profile: Prisma.$ProfilePayload<ExtArgs> | null
+    cliente: Prisma.$ClientePayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -913,6 +1002,7 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   profile<T extends Prisma.User$profileArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$profileArgs<ExtArgs>>): Prisma.Prisma__ProfileClient<runtime.Types.Result.GetResult<Prisma.$ProfilePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  cliente<T extends Prisma.User$clienteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$clienteArgs<ExtArgs>>): Prisma.Prisma__ClienteClient<runtime.Types.Result.GetResult<Prisma.$ClientePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1355,6 +1445,25 @@ export type User$profileArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.ProfileInclude<ExtArgs> | null
   where?: Prisma.ProfileWhereInput
+}
+
+/**
+ * User.cliente
+ */
+export type User$clienteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Cliente
+   */
+  select?: Prisma.ClienteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Cliente
+   */
+  omit?: Prisma.ClienteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClienteInclude<ExtArgs> | null
+  where?: Prisma.ClienteWhereInput
 }
 
 /**
